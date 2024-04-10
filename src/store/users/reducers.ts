@@ -1,35 +1,41 @@
 import {Reducer} from 'redux';
 
-import types from './action-types';
-import {User, UsersState, UsersAction} from './types';
+import {
+  FETCH_USERS_FAILURE,
+  FETCH_USERS_REQUEST,
+  FETCH_USERS_SUCCESS,
+} from './action-types';
+import {UsersState, UserActionTypes} from './types';
 
-const initialUsersState: UsersState = {
-  users: [
-    {
-      id: 1,
-      text: 'User 1',
-    },
-  ],
+const initialUsersState = {
+  users: {},
+  loading: false,
+  error: null,
 };
 
-const usersReducer: Reducer<UsersState, UsersAction> = (
+const usersReducer: Reducer<UsersState, UserActionTypes> = (
   state: UsersState = initialUsersState,
-  action: UsersAction,
+  action: UserActionTypes,
 ): UsersState => {
   switch (action.type) {
-    case types.ADD_USER:
-      const newUser: User = {
-        id: Math.random(),
-        text: action.payload?.text || '',
-      };
+    case FETCH_USERS_REQUEST:
       return {
         ...state,
-        users: [...state.users, newUser],
+        loading: true,
+        error: null,
       };
-    case types.REMOVE_USER:
+    case FETCH_USERS_SUCCESS:
       return {
         ...state,
-        users: state.users.filter(user => user.id !== action.payload.id),
+        loading: false,
+        users: action.payload,
+        error: null,
+      };
+    case FETCH_USERS_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
       };
     default:
       return state;
