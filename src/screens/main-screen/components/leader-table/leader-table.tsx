@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {FlatList, View} from 'react-native';
 import {User} from 'src/store/users/types';
 import {useStyleSheet} from '@ui-kitten/components';
