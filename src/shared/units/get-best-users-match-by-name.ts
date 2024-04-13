@@ -3,13 +3,18 @@ import {User} from 'src/store/users/types';
 export function getBestUsersMatchByName(
   searchName: string,
   users: User[],
+  isAscending: boolean,
 ): User[] {
   const matches: {user: User; score: number}[] = [];
 
   users.forEach((user, index) => {
     const score = calculateMatchScore(searchName, user.name);
     matches.push({
-      user: {...user, rank: index + 1, isHighlighted: true},
+      user: {
+        ...user,
+        rank: isAscending ? index + 1 : users.length - index,
+        isHighlighted: true,
+      },
       score,
     });
   });

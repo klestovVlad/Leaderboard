@@ -5,7 +5,9 @@ export const themedStyles = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
   },
-
+  columnNameWrapper: {
+    flexDirection: 'row',
+  },
   nameWrapper: {
     paddingLeft: 32,
     width: '50%',
@@ -18,5 +20,15 @@ export const themedStyles = StyleSheet.create({
   },
   pointsText: {
     textAlign: 'right',
+  },
+  sortIconWrapper: {
+    marginLeft: 4,
+    width: 20,
+    height: 20,
+  },
+  columnNameRightAlign: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    flex: 1,
   },
 });

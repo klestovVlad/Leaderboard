@@ -1,34 +1,50 @@
 import {getBestUsersMatchByName} from 'src/shared/units/get-best-users-match-by-name';
 import {Alert} from 'react-native';
+import {SORT_DIRECTION} from 'src/shared/constants/sort-options';
 
 import {RootState} from '..';
 
 export const selectAllUsers = (state: RootState) => state.users;
 
 export const selectTopTenUsersByName =
-  (name?: string) => (state: RootState) => {
+  (name?: string, sortDirections?: SORT_DIRECTION) => (state: RootState) => {
     const {users} = selectAllUsers(state);
     if (!name) {
       return undefined;
     }
+    const isAscending = sortDirections === SORT_DIRECTION.Ascending;
     const searchName = name.toLowerCase().trim();
 
-    const sortedUsers = Object.values(users).sort(
-      (userA, userB) => userB.bananas - userA.bananas,
+    const sortedUsers = Object.values(users).sort((userA, userB) => {
+      if (userA.bananas !== userB.bananas) {
+        return isAscending
+          ? userB.bananas - userA.bananas
+          : userA.bananas - userB.bananas;
+      } else {
+        return isAscending
+          ? userA.name.localeCompare(userB.name)
+          : userB.name.localeCompare(userA.name);
+      }
+    });
+
+    const filteredBySearch = getBestUsersMatchByName(
+      searchName,
+      sortedUsers,
+      isAscending,
     );
 
-    const filteredBySearch = getBestUsersMatchByName(searchName, sortedUsers);
-
     if (!filteredBySearch.length) {
-      Alert.alert('No users found', 'Please try another search query', [
-        {text: 'OK'},
-      ]);
+      Alert.alert(
+        ' This user name does not exist!',
+        ' Please specify an existing user name!',
+        [{text: 'OK'}],
+      );
       return [];
     }
 
     const topTenUsers = sortedUsers.slice(0, 10).map((user, index) => ({
       ...user,
-      rank: index + 1,
+      rank: isAscending ? index + 1 : sortedUsers.length - index,
     }));
 
     const topTenUsersWithoutSearchUsers = topTenUsers.filter(user => {

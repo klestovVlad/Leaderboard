@@ -4,6 +4,7 @@ import {useSelector} from 'react-redux';
 import {selectors, useAppDispatch} from 'src/store';
 import {fetchUsers} from 'src/store/users/api';
 import {View} from 'react-native';
+import {SORT_DIRECTION} from 'src/shared/constants/sort-options';
 
 import {SearchRow} from '../search-row/search-row';
 import {LeaderTable} from '../leader-table/leader-table';
@@ -12,10 +13,15 @@ import {themedStyles} from './leaderboard.styles';
 export const Leaderboard = () => {
   const styles = useStyleSheet(themedStyles);
   const [search, setSearch] = useState('');
+  const [searchDirection, setSearchDirection] = useState<SORT_DIRECTION>(
+    SORT_DIRECTION.Ascending,
+  );
   const {loading, error} = useSelector(selectors.users.selectUsersLoadingState);
   const dispatch = useAppDispatch();
 
-  const users = useSelector(selectors.users.selectTopTenUsersByName(search));
+  const users = useSelector(
+    selectors.users.selectTopTenUsersByName(search, searchDirection),
+  );
 
   const hasUsers = users && users.length > 0;
 
@@ -33,7 +39,11 @@ export const Leaderboard = () => {
 
   return (
     <View style={styles.root}>
-      <SearchRow setSearch={setSearch} />
+      <SearchRow
+        setSearch={setSearch}
+        searchDirection={searchDirection}
+        setSearchDirection={setSearchDirection}
+      />
       {hasUsers && <LeaderTable usersArray={users} />}
     </View>
   );
