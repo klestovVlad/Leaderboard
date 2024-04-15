@@ -2,7 +2,7 @@ import {Spinner, Text, useStyleSheet} from '@ui-kitten/components';
 import React, {useEffect, useState} from 'react';
 import {useSelector} from 'react-redux';
 import {selectors, useAppDispatch} from 'src/store';
-import {fetchUsers} from 'src/store/users/api';
+import {cancelFetchUsers, fetchUsers} from 'src/store/users/api';
 import {View} from 'react-native';
 import {SORT_DIRECTION} from 'src/shared/constants/sort-options';
 
@@ -26,7 +26,12 @@ export const Leaderboard = () => {
   const hasUsers = users && users.length > 0;
 
   useEffect(() => {
-    dispatch(fetchUsers());
+    const controller = new AbortController(); // Создаем контроллер
+    dispatch(fetchUsers(controller));
+
+    return () => {
+      cancelFetchUsers(controller);
+    };
   }, [dispatch]);
 
   if (error) {

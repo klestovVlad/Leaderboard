@@ -1,25 +1,28 @@
 import {Dispatch} from 'redux';
 
-import {
-  fetchUsersRequest,
-  fetchUsersSuccess,
-  fetchUsersFailure,
-} from './actions';
+const USERS_URL =
+  'https://drive.usercontent.google.com/u/0/uc?id=1Arrezp0EPcK1gRvbbU6ZpiOABkeJ6AjI&export=download';
 
-export const fetchUsers = () => {
+import userActions from './actions';
+
+export const fetchUsers = (controller: AbortController) => {
   return async (dispatch: Dispatch) => {
-    dispatch(fetchUsersRequest());
+    dispatch(userActions.fetchUsersRequest());
     try {
-      const response = await fetch(
-        'https://drive.usercontent.google.com/u/0/uc?id=1Arrezp0EPcK1gRvbbU6ZpiOABkeJ6AjI&export=download',
-      );
+      const signal = controller.signal;
+
+      const response = await fetch(USERS_URL, {signal});
       if (!response.ok) {
         throw new Error('Failed to fetch users');
       }
       const users = await response.json();
-      dispatch(fetchUsersSuccess(users));
+      dispatch(userActions.fetchUsersSuccess(users));
     } catch (error: any) {
-      dispatch(fetchUsersFailure(error?.message));
+      dispatch(userActions.fetchUsersFailure(error?.message));
     }
   };
+};
+
+export const cancelFetchUsers = (controller: AbortController) => {
+  controller.abort();
 };
