@@ -38,6 +38,6 @@ LeaderBoard is a React Native application designed to display a leaderboard base
 
 ## Screenshots
 
-![main-screen](screenshots/main-screen.png)
-![main-search](screenshots/main-search.png)
-![no-user-found](screenshots/no-users-state.png)
+| Main Screen                                 | Search Screen                                 | No User Found                                    |
+| ------------------------------------------- | --------------------------------------------- | ------------------------------------------------ |
+| ![Main Screen](screenshots/main-screen.png) | ![Search Screen](screenshots/main-search.png) | ![No User Found](screenshots/no-users-state.png) |
