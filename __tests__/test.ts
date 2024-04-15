@@ -31,7 +31,6 @@ describe('selectTopTenUsersByName selector', () => {
   it('returns top ten users sorted by bananas in ascending order', () => {
     const selector = selectTopTenUsersByName('User', SORT_DIRECTION.Ascending);
     const result = selector(store.getState());
-    console.log('result', result);
     expect(result?.length).toBeLessThanOrEqual(10);
     expect(result?.[9].bananas || 0).toBeLessThanOrEqual(
       result?.[0].bananas || 0,
@@ -41,7 +40,6 @@ describe('selectTopTenUsersByName selector', () => {
   it('returns top ten users sorted by bananas in descending order', () => {
     const selector = selectTopTenUsersByName('User', SORT_DIRECTION.Descending);
     const result = selector(store.getState());
-    console.log(result?.length);
     expect(result?.length).toBeLessThanOrEqual(10);
 
     expect(result?.[9].bananas || 0).toBeLessThanOrEqual(
