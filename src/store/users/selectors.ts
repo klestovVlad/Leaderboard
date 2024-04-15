@@ -10,7 +10,10 @@ export const selectTopTenUsersByName =
   (name?: string, sortDirections?: SORT_DIRECTION) => (state: RootState) => {
     const {users} = selectAllUsers(state);
     if (!name) {
-      return undefined;
+      return [];
+    }
+    if (!Object.keys(users).length) {
+      return [];
     }
     const isAscending = sortDirections === SORT_DIRECTION.Ascending;
     const searchName = name.toLowerCase().trim();
@@ -35,8 +38,8 @@ export const selectTopTenUsersByName =
 
     if (!filteredBySearch.length) {
       Alert.alert(
-        ' This user name does not exist!',
-        ' Please specify an existing user name!',
+        'This user name does not exist!',
+        'Please specify an existing user name!',
         [{text: 'OK'}],
       );
       return [];
