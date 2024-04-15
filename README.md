@@ -1,80 +1,43 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# LeaderBoard Application
 
-# Getting Started
+## Overview
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+LeaderBoard is a React Native application designed to display a leaderboard based on a provided dataset of user data. It allows users to input a username, search for it, and view the top 10 users with the most bananas. The searched user, if found, is highlighted in the list. Additionally, users can sort the list by name and view the lowest ranked users.
 
-## Step 1: Start the Metro Server
+## Features
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+- Input a username and search for it.
+- Display the top 10 users with the most bananas.
+- Highlight the searched user in the list if found.
+- Sort the list by name.
+- View the lowest ranked users.
+- Utilizes Redux for state management.
+- Styled with Ui-kitten for enhanced aesthetics.
+- Offers a dark theme for better visibility.
 
-To start Metro, run the following command from the _root_ of your React Native project:
+## Usage
 
-```bash
-# using npm
-npm start
+1. Clone the repository: `git clone https://github.com/klestovVlad/Leaderboard.git`
+2. Navigate to the project directory: `cd LeaderBoard`
+3. Install dependencies: `npm install` or `yarn install`
+4. Run the application: `npm start` or `yarn start`
+5. Follow the instructions to run the application on your desired platform (iOS/Android).
 
-# OR using Yarn
-yarn start
-```
+## Functionalities
 
-## Step 2: Start your Application
+- **Search Functionality**: Input a username and click the search button to render a list of the top 10 users with the most bananas. If the searched user exists, it will be highlighted in the list.
+- **Sorting Options**: Sort the list by name to view users alphabetically. Additionally, view the lowest ranked users, with users of the same score listed alphabetically.
+- **Error Handling**: If the searched user does not exist, an error message is displayed: "This user name does not exist! Please specify an existing user name!".
+- **Fuzzy Search**: Fuzzy search to allow users to search by partial name.
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+## Dependencies
 
-### For Android
+- React Native
+- Redux
+- Ui-kitten
 
-```bash
-# using npm
-npm run android
+## Screenshots
 
-# OR using Yarn
-yarn android
-```
-
-### For iOS
-
-```bash
-# using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
-```
-
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
-
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
-
-## Step 3: Modifying your App
-
-Now that you have successfully run the app, let's modify it.
-
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
-
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
-# Leaderboard
+![main-screen](screenshots/main-screen.png)
+![main-search](screenshots/main-search.png)
+![no-user-found](screenshots/no-users-state.png)
