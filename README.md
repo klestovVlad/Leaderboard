@@ -1,6 +1,7 @@
 # LeaderBoard Application
 
 ## Overview
+link for task: https://docs.google.com/document/d/1_W665dpXiQbRau_myEs4JqLB7UtYFXzaHdXts152GLE
 
 LeaderBoard is a React Native application designed to display a leaderboard based on a provided dataset of user data. It allows users to input a username, search for it, and view the top 10 users with the most bananas. The searched user, if found, is highlighted in the list. Additionally, users can sort the list by name and view the lowest ranked users.
 
